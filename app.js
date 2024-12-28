@@ -1,8 +1,6 @@
 // APIs
 import AwtrixAPI from "./api/awtrix.js";
 import EffectService from "./api/effects.js";
-
-// Services
 import Service from "./services/index.js";
 
 const api = new AwtrixAPI('http://192.168.0.73')

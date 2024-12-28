@@ -6,37 +6,30 @@ import { formatBytes } from "../utils/Bytes.js";
 export default class SystemMonitorService {
     static getSystemData() {
         try {
-            // CPU-Auslastung ermitteln
             const cpuLoad = parseFloat(execSync("grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'").toString().trim()).toFixed(2);
 
-            // RAM-Auslastung ermitteln
             const ramUsage = parseFloat(execSync("free | grep Mem | awk '{print $3/$2 * 100.0}'").toString().trim()).toFixed(2);
 
-            // System-Uptime ermitteln
             const uptimeOutput = execSync('uptime -p').toString().trim();
             const uptime = uptimeOutput.replace('up ', '');
 
-            // GPU-Auslastung ermitteln (für NVIDIA GPUs)
             let gpuUsage = 'N/A';
             try {
                 const gpuOutput = execSync('nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits').toString().trim();
                 gpuUsage = parseFloat(gpuOutput).toFixed(2);
             } catch (gpuError) {
-                console.warn('NVIDIA GPU nicht erkannt oder nvidia-smi nicht installiert.');
+                console.warn('nvidia-smi not found, skipping GPU usage check.');
             }
 
-            // Festplattennutzung ermitteln
             const diskUsageOutput = execSync("df -h --total | grep 'total' | awk '{print $5}'").toString().trim();
             const diskUsage = parseFloat(diskUsageOutput.replace('%', '')).toFixed(2);
 
-            // Netzwerkbandbreite ermitteln (empfangene und gesendete Bytes)
-            const networkInterface = 'enp39s0'; // Ersetzen Sie 'eth0' durch Ihre Netzwerkschnittstelle
+            const networkInterface = 'enp39s0';
             const rxBytes = parseInt(execSync(`cat /sys/class/net/${networkInterface}/statistics/rx_bytes`).toString().trim());
             const txBytes = parseInt(execSync(`cat /sys/class/net/${networkInterface}/statistics/tx_bytes`).toString().trim());
 
             return { cpu: cpuLoad, ram: ramUsage, uptime, gpu: gpuUsage, disk: diskUsage, rxBytes, txBytes };
         } catch (error) {
-            console.error('Fehler beim Abrufen der Systemdaten:', error.message);
             return { cpu: 'N/A', ram: 'N/A', uptime: 'N/A', gpu: 'N/A', disk: 'N/A', rxBytes: 'N/A', txBytes: 'N/A' };
         }
     }
@@ -60,7 +53,6 @@ export default class SystemMonitorService {
     }
 
     static async updateSystemMetric(apiInstance, appName, metricType, data) {
-        // const data = this.getSystemData();
         let metricValue, metricText, progressColor;
 
         switch (metricType) {
