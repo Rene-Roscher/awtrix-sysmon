@@ -10,30 +10,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        platform: [linux]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
+        with:
+          node-version: "22"
 
       - name: Install dependencies
         run: npm install
 
       - name: Build executable
-        run: |
-          npx pkg . --targets node18-${{ matrix.platform }}-x64 --output dist/app-${{ matrix.platform }}
+        run: npx pkg . --targets node18-linux-x64 --output dist/app-linux
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: app-${{ matrix.platform }}
-          path: dist/app-${{ matrix.platform }}
+          name: app-linux
+          path: dist/app-linux
 
   release:
     needs: build
@@ -47,9 +43,8 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          name: Release ${{ github.ref }}
-          files: |
-            app-linux
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          files: dist/app-linux
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
