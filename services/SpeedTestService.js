@@ -1,5 +1,5 @@
 const MessageHelper = require('../utils/MessageHelper.js');
-const speedTest = require('speedtest-net');
+// const speedTest = require('speedtest-net');
 const Colors = require('../utils/Colors.js');
 
 class SpeedTestService {
