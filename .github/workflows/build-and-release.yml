@@ -45,6 +45,6 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
-          files: dist/app-linux
+          files: app-linux
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
