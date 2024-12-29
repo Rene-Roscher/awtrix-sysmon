@@ -1,7 +1,7 @@
 // APIs
-import AwtrixAPI from "./api/awtrix.js";
-import EffectService from "./api/effects.js";
-import Service from "./services/index.js";
+const AwtrixAPI = require('./api/awtrix.js');
+const EffectService = require('./api/effects.js');
+const Service = require('./services/index.js');
 
 const api = new AwtrixAPI('http://192.168.0.73')
 

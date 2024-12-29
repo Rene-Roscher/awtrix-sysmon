@@ -1,9 +1,9 @@
-import MessageHelper from '../utils/MessageHelper.js';
-import { execSync } from 'child_process';
-import Colors from '../utils/Colors.js';
-import { formatBytes } from "../utils/Bytes.js";
+const MessageHelper = require('../utils/MessageHelper.js');
+const {  execSync  } = require('child_process');
+const Colors = require('../utils/Colors.js');
+const {  formatBytes  } = require('../utils/Bytes.js');
 
-export default class SystemMonitorService {
+class SystemMonitorService {
     static getSystemData() {
         try {
             const cpuLoad = parseFloat(execSync("grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'").toString().trim()).toFixed(2);
@@ -108,3 +108,5 @@ export default class SystemMonitorService {
         await apiInstance.sendHTTPRequest(`/api/custom?name=${appName}`, 'POST', payload);
     }
 }
+
+module.exports = SystemMonitorService;

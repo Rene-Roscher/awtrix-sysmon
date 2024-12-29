@@ -1,6 +1,6 @@
-import Colors from "./Colors.js";
+const Colors = require('./Colors.js');
 
-export default class MessageHelper {
+class MessageHelper {
     static formatText(text, color = Colors.gray["300"]) {
         return { t: text, c: color };
     }
@@ -34,3 +34,5 @@ export default class MessageHelper {
         return { t: " ".repeat(size) };
     }
 }
+
+module.exports = MessageHelper;

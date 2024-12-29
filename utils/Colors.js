@@ -1,7 +1,7 @@
 /**
  * Colors class @tailwindcss/colors
  */
-export default class Colors {
+class Colors {
     static green = {
         50: '#f0fdf4',
         100: '#dcfce7',
@@ -114,3 +114,5 @@ export default class Colors {
         950: '#030712',
     };
 }
+
+module.exports = Colors;

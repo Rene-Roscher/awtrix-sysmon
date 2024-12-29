@@ -1,6 +1,6 @@
-import axios from "axios";
+const axios = require('axios');
 
-export default class AwtrixAPI {
+class AwtrixAPI {
     constructor(baseURL) {
         this.baseURL = baseURL;
     }
@@ -26,3 +26,5 @@ export default class AwtrixAPI {
         }
     }
 }
+
+module.exports = AwtrixAPI;

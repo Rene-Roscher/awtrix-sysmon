@@ -1,6 +1,6 @@
-import AwtrixAPI from "./awtrix.js";
+const AwtrixAPI = require('./awtrix.js');
 
-export default class EffectService {
+class EffectService {
     constructor(apiInstance) {
         if (!(apiInstance instanceof AwtrixAPI)) {
             throw new Error('Invalid API instance provided.');
@@ -42,3 +42,5 @@ export default class EffectService {
         }
     }
 }
+
+module.exports = EffectService;

@@ -4,7 +4,9 @@
  * @param interval
  * @returns {number}
  */
-export const setImmediateInterval = (callback, interval) => {
+const setImmediateInterval = (callback, interval) => {
     callback();
     return setInterval(callback, interval);
 }
+
+module.exports = { setImmediateInterval };

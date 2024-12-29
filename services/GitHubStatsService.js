@@ -1,8 +1,8 @@
-import axios from 'axios';
-import MessageHelper from '../utils/MessageHelper.js';
-import Colors from "../utils/Colors.js";
+const axios = require('axios');
+const MessageHelper = require('../utils/MessageHelper.js');
+const Colors = require('../utils/Colors.js');
 
-export default class GitHubStatsService {
+class GitHubStatsService {
     static async updateGitHubStats(apiInstance, username = 'TaylorOtwell', appName = 'gitHubStatsApp') {
         console.log('Updating GitHub stats...');
         try {
@@ -32,3 +32,5 @@ export default class GitHubStatsService {
         }
     }
 }
+
+module.exports = GitHubStatsService;

@@ -1,8 +1,8 @@
-import MessageHelper from '../utils/MessageHelper.js';
-import speedTest from 'speedtest-net';
-import Colors from "../utils/Colors.js";
+const MessageHelper = require('../utils/MessageHelper.js');
+const speedTest = require('speedtest-net');
+const Colors = require('../utils/Colors.js');
 
-export default class SpeedTestService {
+class SpeedTestService {
     static async runSpeedTest(apiInstance, appName = 'speedTestApp') {
         console.log('Running speed test...');
         try {
@@ -27,3 +27,5 @@ export default class SpeedTestService {
         }
     }
 }
+
+module.exports = SpeedTestService;
