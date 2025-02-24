@@ -2,7 +2,7 @@ const AwtrixAPI = require('./api/awtrix.js');
 const EffectService = require('./api/effects.js');
 const Service = require('./services/index.js');
 
-const api = new AwtrixAPI('http://192.168.0.73')
+const api = new AwtrixAPI('http://192.168.178.43')
 
 Service.init(api);
 
